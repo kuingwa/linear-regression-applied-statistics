@@ -1,154 +1,92 @@
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
-from scipy.stats import t
+# Angewandte statistische Modelle: Lineare Regression
 
+## Einleitung
 
-# -----------------------------
-# 1. Données synthétiques
-# -----------------------------
-def generate_data():
-    rng = np.random.default_rng(42)
-    x = rng.uniform(5, 25, 120)
-    noise = rng.normal(0, 3.5, 120)
-    y = 8 + 3.5 * x + noise
-    return x, y
+Die lineare Regression ist eines der wichtigsten und am häufigsten verwendeten statistischen Modelle. Sie hilft dabei, Zusammenhänge zwischen einer abhängigen Variable und einer oder mehreren unabhängigen Variablen zu modellieren. In diesem Projekt wird ein einfacher Fall untersucht, bei dem eine einzige unabhängige Variable verwendet wird, um eine abhängige Variable zu erklären.
 
+Das Ziel besteht darin, die Beziehung zwischen den Variablen mathematisch zu beschreiben und zu beurteilen, wie gut das Modell zu den Daten passt. Solche Modelle werden in vielen Bereichen verwendet, zum Beispiel in der Wirtschaft, der Biologie, in der Technik oder im Sozialwesen.
 
-# -----------------------------
-# 2. Modèle de régression
-# -----------------------------
-def fit_regression_model(x, y):
-    X = x.reshape(-1, 1)
-    model = LinearRegression()
-    model.fit(X, y)
-    y_pred = model.predict(X)
-    return model, y_pred
+## Forschungsfrage
 
+In diesem Projekt geht es darum, die Beziehung zwischen zwei Größen zu untersuchen. Die Frage lautet: Wie gut lässt sich eine abhängige Variable mit einer linearen Funktion einer unabhängigen Variable erklären?
 
-# -----------------------------
-# 3. Intervalle de confiance
-# -----------------------------
-def confidence_interval(x, y, y_pred):
-    x_sorted = np.sort(x)
-    X_sorted = x_sorted.reshape(-1, 1)
-    model = LinearRegression()
-    model.fit(X_sorted, y)
-    y_fit = model.predict(X_sorted)
+Wenn wir zum Beispiel die Geschwindigkeit eines Fahrzeugs und die zurückgelegte Strecke betrachten, dann kann die lineare Regression helfen, den Zusammenhang zwischen beiden Größen zu modellieren.
 
-    x_mean = x.mean()
-    sxx = np.sum((x_sorted - x_mean) ** 2)
+## Ziele der Arbeit
 
-    sigma2 = np.sum((y - y_pred) ** 2) / (len(x) - 2)
-    se_fit = np.sqrt(sigma2 * (1 / len(x) + (x_sorted - x_mean) ** 2 / sxx))
+- das Modell mathematisch zu definieren
+- die Parameter zu schätzen
+- die Güte des Modells zu bewerten
+- Fehler und Abweichungen zu analysieren
+- die Ergebnisse verständlich zu interpretieren
 
-    t_crit = t.ppf(0.975, len(x) - 2)
-    lower = y_fit - t_crit * se_fit
-    upper = y_fit + t_crit * se_fit
+## Theorie der linearen Regression
 
-    return x_sorted, y_fit, lower, upper
+Das Grundmodell der linearen Regression hat die Form:
 
+y = β0 + β1x + ε
 
-# -----------------------------
-# 4. Figure style slide
-# -----------------------------
-def create_slide():
-    x, y = generate_data()
-    model, y_pred = fit_regression_model(x, y)
-    x_sorted, y_fit, lower, upper = confidence_interval(x, y, y_pred)
+Dabei gilt:
+- y: abhängige Variable
+- x: unabhängige Variable
+- β0: Achsenabschnitt
+- β1: Steigung
+- ε: Fehlerterm
 
-    fig = plt.figure(figsize=(14, 8), facecolor="#0b4d6f")
+Die Parameter β0 und β1 werden mit der Methode der kleinsten Quadrate geschätzt. Ziel dieser Methode ist es, die Summe der quadrierten Abweichungen zwischen beobachteten und vorhergesagten Werten zu minimieren.
 
-    # Titre principal
-    fig.text(
-        0.055, 0.87,
-        "Applied Statistical Models: Linear Regression",
-        fontsize=33,
-        fontweight="bold",
-        color="white",
-        ha="left",
-        va="center"
-    )
+## Methodik
 
-    # Sous-titres à gauche
-    fig.text(
-        0.055, 0.62,
-        "Subtopics:",
-        fontsize=26,
-        fontweight="bold",
-        color="white",
-        ha="left",
-        va="top"
-    )
+Für dieses Projekt wurden künstliche Daten erzeugt, die einen klaren linearen Zusammenhang zwischen x und y zeigen. Anschließend wurden die Daten in Trainings- und Testdaten aufgeteilt. Das Modell wurde auf den Trainingsdaten angepasst und anschließend auf den Testdaten bewertet.
 
-    subtopics = [
-        "• model specification & design",
-        "• fitting & loss functions",
-        "• evaluation, explained variance",
-        "• assumptions and diagnostics",
-        "• scikit-learn, statsmodels",
-    ]
+## Modellbeschreibung
 
-    y_pos = 0.56
-    for line in subtopics:
-        fig.text(0.075, y_pos, line, fontsize=22, color="white", ha="left", va="center")
-        y_pos -= 0.08
+Das verwendete Modell lautet:
 
-    # Références à gauche
-    fig.text(
-        0.055, 0.25,
-        "References:",
-        fontsize=26,
-        fontweight="bold",
-        color="white",
-        ha="left",
-        va="top"
-    )
+y = β0 + β1x + ε
 
-    refs = [
-        "• James et al. An Introduction to Statistical Learning (Ch. 2.1, 3.1 and 3.6). Link",
-        "• Linear Regression @ GeeksForGeeks Link",
-        "• StatQuest: Linear Regression YouTube",
-    ]
+Hierbei beschreibt β1, wie stark sich die abhängige Variable ändert, wenn die unabhängige Variable um eine Einheit steigt. β0 gibt den Wert von y an, wenn x gleich null ist.
 
-    y_ref = 0.20
-    for line in refs:
-        fig.text(0.075, y_ref, line, fontsize=17, color="white", ha="left", va="center")
-        y_ref -= 0.06
+## Bewertung des Modells
 
-    # Zone graphique à droite
-    ax = fig.add_axes([0.49, 0.18, 0.43, 0.42], facecolor="#f3f3f3")
+Die Modellgüte wurde mit mehreren Kennzahlen bewertet:
 
-    # Scatter plot
-    ax.scatter(x, y, s=18, color="navy", alpha=0.8)
+- MAE: durchschnittlicher absoluter Fehler
+- MSE: mittlerer quadratischer Fehler
+- RMSE: Wurzel aus dem mittleren quadratischen Fehler
+- R²: Bestimmtheitsmaß
 
-    # Droite de régression
-    ax.plot(x_sorted, y_fit, color="navy", linewidth=2.0)
+Diese Kennzahlen geben wichtige Hinweise darauf, wie gut das Modell die Daten erklärt und wie präzise die Vorhersagen sind.
 
-    # Intervalle de confiance
-    ax.fill_between(x_sorted, lower, upper, color="gray", alpha=0.25)
+## Residuenanalyse
 
-    # Titres et labels
-    ax.set_title("95% Confidence Interval", fontsize=14, pad=8, color="black")
-    ax.set_xlabel("speed", fontsize=12)
-    ax.set_ylabel("demand", fontsize=12)
-    ax.tick_params(axis='both', labelsize=10)
-    ax.grid(True, linestyle='--', linewidth=0.7, alpha=0.35)
+Die Residuen sind die Unterschiede zwischen beobachteten und vorhergesagten Werten. Ihre Analyse ist wichtig, weil sie zeigt, ob die Annahmen der linearen Regression plausibel sind. Besonders interessant sind dabei:
 
-    # Texte sous le graphique
-    fig.text(
-        0.58, 0.09,
-        "dependent and independent variables",
-        fontsize=20,
-        color="white",
-        ha="center",
-        va="center"
-    )
+- Linearität
+- Unabhängigkeit der Fehler
+- Homoskedastizität
+- Normalverteilung der Residuen
 
-    # Enregistrement
-    plt.savefig("linear_regression_slide.png", dpi=300, bbox_inches="tight")
-    plt.show()
+Wenn die Residuen zufällig verteilt sind, spricht das dafür, dass das Modell gut passt.
 
+## Ergebnisse und Interpretation
 
-if __name__ == "__main__":
-    create_slide()
+Die Ergebnisse zeigen einen klaren positiven Zusammenhang zwischen der unabhängigen und der abhängigen Variable. Die Regressionsgerade passt gut zu den Daten, und die Kennzahlen bestätigen, dass das Modell insgesamt eine starke Vorhersagekraft besitzt.
+
+Die grafische Darstellung zeigt deutlich, dass die Daten auf einer nahezu linearen Struktur beruhen. Die Entscheidung für ein lineares Modell ist daher sinnvoll und gut nachvollziehbar.
+
+## Diskussion
+
+Die lineare Regression ist ein sehr nützliches und leicht interpretierbares Modell. Es eignet sich besonders für Datensätze mit einem klaren linearen Zusammenhang. Gleichzeitig ist es wichtig, die Annahmen zu prüfen und die Grenzen des Modells zu erkennen. In realen Anwendungen können komplexere Zusammenhänge existieren, dann sind andere Modelle oft besser geeignet.
+
+## Fazit
+
+Das Projekt zeigt, wie eine einfache lineare Regression dabei hilft, einen Zusammenhang zwischen zwei Variablen zu modellieren, zu bewerten und visuell zu interpretieren. Die Kombination aus mathematischer Modellierung, Kennzahlen und grafischer Darstellung macht die Methode besonders verständlich und für die Datenanalyse relevant.
+
+## Referenzen
+
+- James et al. – Introduction to Statistical Learning
+- scikit-learn Documentation
+- GeeksforGeeks – Linear Regression
+- StatQuest – Linear Regression
+- Wikipedia – Lineare Regression

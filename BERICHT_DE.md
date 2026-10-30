@@ -1,71 +1,69 @@
-# Angewandte statistische Modelle: Lineare Regression
+# Applied Statistical Models: Linear Regression
 
-## Einleitung
+Dieses Projekt zeigt eine einfache lineare Regression mit Python und scikit-learn.
 
-Die lineare Regression ist eines der wichtigsten und am häufigsten verwendeten statistischen Modelle. Sie ermöglicht es, die Beziehung zwischen einer abhängigen Variable und einer oder mehreren unabhängigen Variablen zu untersuchen und zu beschreiben. Das Hauptziel dieses Modells besteht darin, reale Daten präzise abzubilden, die Modellparameter zu definieren und die Ergebnisse sinnvoll zu interpretieren.
+## Ziel des Projekts
 
-In vielen Bereichen wie Wirtschaft, Biologie, Psychologie oder Soziologie ist die lineare Regression ein zentrales Werkzeug der Datenanalyse. Sie ermöglicht es, Zusammenhänge zu erkennen und zu quantifizieren. Ein typisches Beispiel ist die Beziehung zwischen Lernzeit und Prüfungsleistung oder zwischen Temperatur und Energieverbrauch.
-
-## Forschungsvorhaben
-
-Das zentrale Problem besteht darin, die Beziehung zwischen zwei quantitativen Variablen systematisch zu erfassen und zu beschreiben. Beispielsweise kann untersucht werden, ob eine Veränderung einer unabhängigen Variable mit einer Veränderung der abhängigen Variable zusammenhängt und in welchem Ausmaß diese Beziehung durch eine Gerade beschrieben werden kann.
-
-## Ziele
-
-- Definition des Modells
-- Schätzung der Parameter
-- Bewertung der Anpassungsgüte
-- Analyse der Modellfehler
-- Interpretation der Ergebnisse
-
-## Theorie der linearen Regression
-
-Das Grundmodell lautet:
+Das Ziel dieses Projekts ist es, die Beziehung zwischen zwei Variablen zu untersuchen und zu modellieren. Dabei wird eine unabhängige Variable verwendet, um eine abhängige Variable vorherzusagen. Die grundlegende Form des Modells lautet:
 
 y = β0 + β1x + ε
 
-Dabei gilt:
+Dabei bedeutet:
 - y: abhängige Variable
 - x: unabhängige Variable
-- β0: Intercept
+- β0: Achsenabschnitt
 - β1: Steigung
 - ε: Fehlerterm
 
-Die Methode der kleinsten Quadrate (OLS) minimiert die Summe der quadrierten Residuen und liefert die beste Gerade für die Daten.
+## Warum ist dieses Projekt relevant?
 
-## Methodik
+Die lineare Regression ist eines der wichtigsten Verfahren der Statistik und des maschinellen Lernens. Sie wird häufig in Forschung, Wirtschaft, Technik und Datenanalyse eingesetzt, um Zusammenhänge zwischen Variablen zu verstehen und Vorhersagen zu treffen.
 
-Für dieses Projekt wurden synthetische Daten verwendet, um das Prinzip der linearen Regression klar darzustellen. Anschließend wurde der Datensatz in Trainings- und Testdaten aufgeteilt. Das Modell wurde auf dem Trainingssatz angepasst und auf dem Testsatz evaluiert.
+## Verwendete Technologien
 
-## Modellspezifikation
+- Python
+- NumPy
+- Matplotlib
+- scikit-learn
+- SciPy
 
-Das Modell wird als:
+## Installation
 
-y = β0 + β1x + ε
+So wird das Projekt lokal gestartet:
 
-definiert. Die Parameter β0 und β1 werden mit OLS geschätzt. Der Koeffizient β1 beschreibt, wie stark sich y verändert, wenn x um eine Einheit steigt.
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
-## Bewertung des Modells
+## Ausführung
 
-Zur Bewertung der Modellgüte werden Kennzahlen wie R², MAE, MSE und RMSE verwendet. Ein hoher R²-Wert zeigt an, dass ein großer Teil der Varianz durch das Modell erklärt wird. MSE und RMSE geben zusätzlich Informationen über die Größe der Vorhersagefehler.
+```bash
+python main.py
+```
 
-## Diagnostik und Annahmen
+## Ausgabe des Projekts
 
-Zu den wichtigsten Annahmen der linearen Regression gehören:
-- Linearität
-- Unabhängigkeit der Fehler
-- Homoskedastizität
-- Normalverteilung der Residuen
+Beim Start des Programms werden folgende Dateien erzeugt:
 
-Die Residuenanalyse hilft dabei, Muster zu erkennen und die Validität des Modells zu prüfen.
+- `linear_regression_plot.png`
+- `residual_diagnostics.png`
 
-## Ergebnisse und Interpretation
+Diese Dateien zeigen:
+- die Regressionsgerade
+- das Konfidenzintervall
+- die Residuenanalyse
 
-Die Ergebnisse zeigen einen positiven Zusammenhang zwischen den Variablen. Das Modell weist eine solide Vorhersagekraft auf, obwohl die Grenzen linearer Modelle bei komplexeren Strukturen berücksichtigt werden müssen.
+## Beschreibung der Analyse
 
-## Diskussion und Fazit
+Das Projekt zeigt die folgenden Schritte:
 
-Die lineare Regression ist ein leistungsfähiges und leicht interpretierbares Werkzeug. Sie ist besonders nützlich für einfache quantitative Analysen, muss aber gleichzeitig auf ihre Annahmen und Grenzen geprüft werden. Diese Arbeit zeigt ihren fundamentalen Nutzen für die praktische Datenanalyse.
+- Datengenerierung
+- Modellanpassung
+- Berechnung von MAE, MSE, RMSE und R²
+- Darstellung der Regressionsgeraden
+- Überprüfung der Modellannahmen mit Residuen
 
 ## Referenzen
 
@@ -73,4 +71,3 @@ Die lineare Regression ist ein leistungsfähiges und leicht interpretierbares We
 - scikit-learn Documentation
 - GeeksforGeeks – Linear Regression
 - StatQuest – Linear Regression
-- Wikipedia – Lineare Regression
